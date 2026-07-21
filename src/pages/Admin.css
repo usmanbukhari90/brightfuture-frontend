@@ -1,0 +1,56 @@
+.admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.admin-form-section form {
+  margin-top: 0.5rem;
+}
+
+.file-name {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+}
+
+.success-message {
+  background: #e8f0e8;
+  color: var(--success);
+  padding: 0.75rem 1rem;
+  border: 1px solid #c0d4c0;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.admin-guide {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-guide li {
+  padding: 0.6rem 0;
+  padding-left: 1.25rem;
+  position: relative;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-guide li:last-child {
+  border-bottom: none;
+}
+
+.admin-guide li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent-gold);
+}
+
+@media (max-width: 768px) {
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+}

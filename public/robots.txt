@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brightfutureschool-dgk.vercel.app/sitemap.xml

@@ -1,0 +1,283 @@
+/* Prose layout — no card boxes on public pages */
+
+.prose-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.prose-section {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(107, 79, 58, 0.12);
+}
+
+.prose-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.prose-section h2 {
+  font-size: clamp(1.45rem, 3vw, 1.85rem);
+  margin-bottom: 0.85rem;
+  position: relative;
+  display: inline-block;
+}
+
+.prose-section h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin-top: 0.45rem;
+  background: linear-gradient(90deg, var(--accent-gold), transparent);
+}
+
+.prose-section h3 {
+  font-size: 1.15rem;
+  margin: 1.25rem 0 0.5rem;
+  color: var(--warm-brown);
+}
+
+.prose-section p,
+.prose-section li {
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--text-secondary);
+}
+
+.prose-section ul,
+.prose-section ol {
+  padding-left: 1.35rem;
+  margin-top: 0.75rem;
+}
+
+.prose-section ol li {
+  margin-bottom: 0.65rem;
+}
+
+.prose-section ol li ul {
+  margin-top: 0.5rem;
+  list-style: disc;
+}
+
+.prose-quote {
+  margin-top: 1.25rem;
+  padding: 1rem 0 1rem 1.25rem;
+  border-left: 3px solid var(--accent-gold);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--deep-brown);
+  line-height: 1.55;
+}
+
+.prose-quote--bold {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 600;
+  font-style: normal;
+}
+
+.contact-lines p {
+  margin-bottom: 0.35rem;
+}
+
+.contact-lines strong {
+  color: var(--deep-brown);
+  font-weight: 600;
+}
+
+/* Home text navigation — legacy, replaced by home-main-nav on Home page */
+
+.academic-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.academic-link-card {
+  padding: 1.15rem 1.25rem;
+  border: 1px solid rgba(107, 79, 58, 0.2);
+  border-radius: 16px;
+  background: rgba(253, 251, 247, 0.75);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.academic-link-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(154, 123, 79, 0.45);
+  box-shadow: 0 14px 28px rgba(74, 52, 38, 0.1);
+}
+
+.academic-link-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.35rem;
+  color: var(--deep-brown);
+}
+
+.academic-link-card p {
+  font-size: 0.9rem;
+}
+
+/* Enrollment steps with arrows */
+
+.enroll-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.enroll-step {
+  flex: 1;
+  min-width: 160px;
+  text-align: center;
+}
+
+.enroll-step-image {
+  height: 120px;
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 0.75rem;
+  transition: transform 0.35s ease;
+}
+
+.enroll-step:hover .enroll-step-image {
+  transform: scale(1.03);
+}
+
+.enroll-step h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--deep-brown);
+}
+
+.enroll-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--accent-gold);
+  font-size: 1.4rem;
+  padding-top: 2.5rem;
+}
+
+/* Full-width poster banner (About page mid-section) */
+
+.inline-poster {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  min-height: 75vh;
+  height: 75vh;
+  border-radius: 0;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: none;
+}
+
+.inline-poster::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(42, 27, 18, 0.25), rgba(42, 27, 18, 0.72));
+}
+
+.inline-poster::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(42, 27, 18, 0.78), transparent);
+}
+
+.inline-poster blockquote {
+  position: relative;
+  z-index: 1;
+  padding: 2rem clamp(1.25rem, 4vw, 3rem);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.45;
+  max-width: 560px;
+}
+
+.table-section {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+/* FAQ */
+
+.faq-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(107, 79, 58, 0.1);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-item h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+  color: var(--deep-brown);
+}
+
+/* Social row */
+
+.social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.social-icon-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(107, 79, 58, 0.18);
+  background: rgba(253, 251, 247, 0.6);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.social-icon-link:hover {
+  transform: translateY(-2px);
+  background: var(--white);
+  border-color: rgba(154, 123, 79, 0.35);
+  color: var(--deep-brown);
+}
+
+.social-icon-link svg {
+  font-size: 1.2rem;
+  color: var(--accent-red);
+}
+
+.query-form {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(107, 79, 58, 0.12);
+}
+
+@media (max-width: 768px) {
+  .enroll-arrow {
+    display: none;
+  }
+
+  .enroll-steps {
+    flex-direction: column;
+  }
+}

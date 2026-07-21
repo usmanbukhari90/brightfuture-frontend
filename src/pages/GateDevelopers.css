@@ -1,0 +1,240 @@
+.gate-page {
+  background-color: #d6ecf7;
+  color: #1e293b;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.gate-hero {
+  background-color: #ffffff;
+  border: 1px solid #cfe8f5;
+  color: #1e293b;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.gate-logo-circle {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.gate-brand {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0f2a3d;
+}
+
+.gate-tagline {
+  color: #5b7893;
+  margin-top: 0.5rem;
+}
+
+.gate-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+
+.badge {
+  background-color: #0284c7;
+  color: #ffffff;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.gate-section {
+  max-width: 860px;
+  margin: 0 auto 2.5rem;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #0284c7;
+  margin-bottom: 0.3rem;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f2a3d;
+  margin-bottom: 0.8rem;
+}
+
+.section-body {
+  color: #43607a;
+  line-height: 1.7;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.service-card {
+  background-color: #ffffff;
+  border: 1px solid #cfe8f5;
+  border-radius: 12px;
+  padding: 1.2rem;
+}
+
+.service-card i {
+  font-size: 24px;
+  color: #0284c7;
+}
+
+.service-card h4 {
+  color: #0f2a3d;
+  margin: 0.6rem 0 0.3rem;
+  font-weight: 700;
+}
+
+.service-card p {
+  color: #5b7893;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.gate-divider {
+  max-width: 860px;
+  margin: 0 auto 2rem;
+  border: none;
+  border-top: 1px solid #cfe8f5;
+}
+
+.dev-card {
+  display: flex;
+  gap: 1.2rem;
+  background-color: #ffffff;
+  border: 1px solid #cfe8f5;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.dev-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.dev-name {
+  font-weight: 700;
+  color: #0f2a3d;
+}
+
+.dev-role {
+  font-size: 0.85rem;
+  color: #0284c7;
+  margin: 0.2rem 0;
+}
+
+.dev-desc {
+  font-size: 0.875rem;
+  color: #43607a;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+}
+
+.project-tag {
+  background-color: #eaf6fd;
+  color: #0284c7;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid #cfe8f5;
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #cfe8f5;
+  border-radius: 12px;
+  padding: 1rem;
+  text-decoration: none;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.social-link:hover {
+  background-color: #f4fbfe;
+  border-color: #9cd4ee;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  color: #ffffff;
+}
+
+.social-icon svg {
+  fill: #ffffff;
+  color: #ffffff;
+}
+
+.icon-instagram { background-color: #E4405F; }
+.icon-linkedin  { background-color: #0A66C2; }
+.icon-github    { background-color: #181717; }
+.icon-email     { background-color: #EA4335; }
+.icon-facebook  { background-color: #1877F2; }
+.icon-whatsapp  { background-color: #25D366; }
+.icon-twitter   { background-color: #000000; }
+
+.social-name   { font-weight: 600; color: #0f2a3d; font-size: 0.9rem; }
+.social-handle { font-size: 0.8rem; color: #5b7893; }
+
+.back-btn {
+  background-color: #0284c7;
+  color: #ffffff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+  background-color: #026a9e;
+}

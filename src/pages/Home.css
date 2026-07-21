@@ -1,0 +1,3 @@
+.announcements-heading {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+}

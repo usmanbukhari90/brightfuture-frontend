@@ -1,0 +1,97 @@
+/* Scroll reveal */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Page route transition */
+
+.page-enter {
+  animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero poster animations */
+
+.hero-poster {
+  animation: heroReveal 0.9s ease both, kenBurnsBg 22s ease-in-out infinite alternate;
+  background-size: cover;
+}
+
+.hero-poster::before {
+  animation: none;
+}
+
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes kenBurnsBg {
+  from {
+    background-size: 100%;
+  }
+  to {
+    background-size: 108%;
+  }
+}
+
+/* Announcement card entrance */
+
+.announcement-card {
+  animation: cardOpen 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardOpen {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Subtle background shimmer */
+
+.app-layout::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 20%, rgba(154, 123, 79, 0.06), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(143, 44, 34, 0.04), transparent 35%);
+  z-index: 0;
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
+}

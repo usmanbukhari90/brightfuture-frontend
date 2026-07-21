@@ -1,0 +1,66 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(rgba(54, 35, 23, 0.7), rgba(54, 35, 23, 0.82)),
+    url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=80')
+      center/cover;
+  padding: 1.5rem;
+}
+
+.login-card {
+  background: rgba(253, 251, 247, 0.95);
+  border: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 26px;
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(8px);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-logo-wrap {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 1rem;
+}
+
+.login-logo-wrap .school-logo,
+.login-logo-wrap .logo-fallback {
+  width: 100%;
+  height: 100%;
+}
+
+.login-header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.login-header p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.login-note {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.login-note strong {
+  color: var(--text-secondary);
+}

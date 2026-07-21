@@ -1,0 +1,42 @@
+.school-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.18));
+}
+
+.school-logo--dark {
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.4));
+}
+
+.school-logo--light,
+.school-logo--sidebar {
+  filter: drop-shadow(0 4px 12px rgba(74, 52, 38, 0.15));
+}
+
+.logo-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.logo-fallback--dark {
+  color: var(--cream);
+  font-size: 1.2rem;
+}
+
+.logo-fallback--light,
+.logo-fallback--sidebar {
+  color: var(--deep-brown);
+  font-size: 1.1rem;
+}
+
+.header-brand:hover .school-logo,
+.sidebar-header:hover .school-logo {
+  transform: scale(1.05);
+}

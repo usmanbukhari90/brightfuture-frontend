@@ -52,7 +52,7 @@ export default function About() {
         <ScrollReveal className="prose-section">
           <p className="section-label">Contact Details</p>
           <div className="contact-lines">
-            <p><strong>Address:</strong> Muslim Town, Manka Canal Road near Lodhi Qabristan, D.G.Khan</p>
+            <p><strong>Address:</strong> Muslim Town, Manka Canal Road near Lodhi Graveyard, D.G.Khan</p>
             <p><strong>Contact Number:</strong> 0333-7253940</p>
             <p><strong>Contact Number:</strong> 0313-7254087</p>
           </div>

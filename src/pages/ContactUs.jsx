@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     q: 'Where is the school located?',
-    a: 'Bright Future School is located at Muslim Town, Manka Canal Road near Lodhi Qabristan, D.G.Khan.',
+    a: 'Bright Future School is located at Muslim Town, Manka Canal Road near Lodhi Graveyard, D.G.Khan.',
   },
 ];
 
@@ -67,7 +67,7 @@ export default function ContactUs() {
         <ScrollReveal className="prose-section">
           <h2>School Information</h2>
           <div className="contact-lines">
-            <p><strong>Address:</strong> Muslim Town, Manka Canal Road near Lodhi Qabristan, D.G.Khan</p>
+            <p><strong>Address:</strong> Muslim Town, Manka Canal Road near Lodhi Graveyard, D.G.Khan</p>
             <p><strong>Phone:</strong> 0333-7253940</p>
             <p><strong>Phone:</strong> 0313-7254087</p>
             <p><strong>Email:</strong> info@brightfutureschool.edu.pk</p>

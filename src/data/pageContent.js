@@ -1,6 +1,6 @@
 export const schoolStats = [
   { value: 'Playgroup – Class 8', label: 'Foundation through Middle School' },
-  { value: 'D.G.Khan Campus', label: 'Muslim Town, Near Lodhi Qabristan' },
+  { value: 'D.G.Khan Campus', label: 'Muslim Town,Manka Canal Road Near Lodhi Graveyard' },
   { value: 'Holistic Education', label: 'Academics, Character & Activities' },
   { value: 'Parent Partnership', label: 'Open communication & guidance' },
 ];

@@ -5,6 +5,7 @@ export const schoolStats = [
   { value: 'Parent Partnership', label: 'Open communication & guidance' },
 ];
 
+
 export const homeFeatures = [
   {
     title: 'Purposeful Learning',

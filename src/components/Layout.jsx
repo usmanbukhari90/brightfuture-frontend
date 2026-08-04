@@ -4,6 +4,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import SplashScreen from './SplashScreen';
 import Footer from './Footer';
+import ScrollToTop from './ScrollToTop';
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -11,6 +12,8 @@ export default function Layout() {
 
   return (
     <div className="app-layout">
+      <ScrollToTop />
+
       <SplashScreen />
       <Header
         onMenuToggle={() => setSidebarOpen((prev) => !prev)}

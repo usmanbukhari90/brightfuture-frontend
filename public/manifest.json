@@ -1,0 +1,15 @@
+{
+    "name": "Bright Future School",
+    "short_name": "Bright Future School",
+    "icons": [
+      {
+        "src": "/school-logo.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff"
+  }

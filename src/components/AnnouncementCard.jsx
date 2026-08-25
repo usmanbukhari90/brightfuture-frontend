@@ -1,5 +1,6 @@
 import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
+import { isUrduText } from '../utils/textUtils';
 import './AnnouncementCard.css';
 
 function formatDate(dateStr) {
@@ -12,6 +13,9 @@ function formatDate(dateStr) {
 
 export default function AnnouncementCard({ announcement, onDelete, index = 0 }) {
   const { isAdmin } = useAuth();
+
+  const titleIsUrdu = isUrduText(announcement.title);
+  const bodyIsUrdu = isUrduText(announcement.content);
 
   const handleDelete = async () => {
     if (!window.confirm('Remove this announcement?')) return;
@@ -29,14 +33,22 @@ export default function AnnouncementCard({ announcement, onDelete, index = 0 }) 
       style={{ animationDelay: `${index * 0.08}s` }}
     >
       <div className="announcement-header">
-        <h2 className="announcement-title">{announcement.title}</h2>
+        <h2
+          className={`announcement-title ${titleIsUrdu ? 'urdu-text' : ''}`}
+          dir={titleIsUrdu ? 'rtl' : 'ltr'}
+        >
+          {announcement.title}
+        </h2>
         <div className="announcement-meta">
           <span>{formatDate(announcement.created_at)}</span>
         </div>
       </div>
 
       {announcement.content && (
-        <div className="announcement-body">
+        <div
+          className={`announcement-body ${bodyIsUrdu ? 'urdu-text' : ''}`}
+          dir={bodyIsUrdu ? 'rtl' : 'ltr'}
+        >
           <p>{announcement.content}</p>
         </div>
       )}

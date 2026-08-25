@@ -41,6 +41,24 @@
   line-height: 1.7;
 }
 
+.announcement-body p {
+  white-space: pre-wrap;   /* preserves every line break and space exactly as typed */
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.urdu-text {
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+  line-height: 2.5;
+  text-align: right;
+  font-size: 1.15em;
+  direction: rtl;
+}
+
+h2.announcement-title.urdu-text {
+  font-size: 1.65rem;
+}
+
 .announcement-media {
   border-top: 1px solid var(--border);
   overflow: hidden;

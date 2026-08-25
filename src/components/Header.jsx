@@ -8,12 +8,12 @@ export default function Header({ onMenuToggle, sidebarOpen }) {
 
   return (
     <header className="header">
-      <div className="header-brand">
+            <Link to="/" className="header-brand">
         <div className="logo-shell">
           <SchoolLogo variant="dark" />
         </div>
         <h1 className="school-name">Bright Future School</h1>
-      </div>
+      </Link>
 
       <button
         className={`menu-btn ${sidebarOpen ? 'open' : ''}`}

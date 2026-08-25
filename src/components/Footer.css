@@ -26,7 +26,10 @@
   height: 72px;
   margin-bottom: 0.75rem;
 }
-
+.footer-logo-wrap {
+  display: block;
+  text-decoration: none;
+}
 .footer-logo-wrap .school-logo,
 .footer-logo-wrap .logo-fallback {
   width: 100%;

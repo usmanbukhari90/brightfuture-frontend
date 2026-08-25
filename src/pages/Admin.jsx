@@ -4,8 +4,81 @@ import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
 import './Admin.css';
 
+// --- Small inline icons (no external icon library required) ---
+const IconMenu = () => (
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <line x1="3" y1="6" x2="21" y2="6" />
+    <line x1="3" y1="12" x2="21" y2="12" />
+    <line x1="3" y1="18" x2="21" y2="18" />
+  </svg>
+);
+const IconMegaphone = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 11v2a2 2 0 0 0 2 2h1l3 5V4l-3 5H5a2 2 0 0 0-2 2z" />
+    <path d="M13 8a5 5 0 0 1 0 8" />
+    <path d="M17 5a9 9 0 0 1 0 14" />
+  </svg>
+);
+const IconChart = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 20V10" /><path d="M12 20V4" /><path d="M20 20v-6" />
+  </svg>
+);
+const IconWallet = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2.5" y="6" width="19" height="13" rx="2" />
+    <path d="M2.5 10h19" />
+    <circle cx="17" cy="14" r="1" />
+  </svg>
+);
+const IconCalendar = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="5" width="18" height="16" rx="2" />
+    <path d="M3 10h18" /><path d="M8 3v4" /><path d="M16 3v4" />
+  </svg>
+);
+const IconTrophy = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M8 4h8v5a4 4 0 0 1-8 0V4z" />
+    <path d="M5 4h3v3a3 3 0 0 1-3-3z" /><path d="M19 4h-3v3a3 3 0 0 0 3-3z" />
+    <path d="M12 13v4" /><path d="M9 21h6" /><path d="M10 17h4l1 4H9l1-4z" />
+  </svg>
+);
+
+const NAV_ITEMS = [
+  { id: 'publish', label: 'Publish Announcements', icon: IconMegaphone },
+  { id: 'results', label: 'Manage Results', icon: IconChart },
+  { id: 'dues', label: 'Manage Dues', icon: IconWallet },
+  { id: 'attendance', label: 'Manage Attendance', icon: IconCalendar },
+  { id: 'toppers', label: 'Manage Toppers', icon: IconTrophy },
+];
+
+function ComingSoonSection({ title, description, bullets, ctaLabel, onCta }) {
+  return (
+    <section className="card admin-empty-card">
+      <span className="admin-empty-badge">In progress</span>
+      <h2 className="card-title">{title}</h2>
+      <p className="admin-empty-desc">{description}</p>
+      {bullets && bullets.length > 0 && (
+        <ul className="admin-guide">
+          {bullets.map((b, i) => <li key={i}>{b}</li>)}
+        </ul>
+      )}
+      {ctaLabel && (
+        <button type="button" className="btn btn-primary" onClick={onCta}>
+          {ctaLabel}
+        </button>
+      )}
+    </section>
+  );
+}
+
 export default function Admin() {
   const { isAdmin, loading } = useAuth();
+
+  const [activeSection, setActiveSection] = useState('publish');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [media, setMedia] = useState(null);
@@ -166,236 +239,329 @@ export default function Admin() {
     }
   };
 
+  const goTo = (id) => {
+    setActiveSection(id);
+    setSidebarOpen(false);
+  };
+
+  const activeLabel = NAV_ITEMS.find((n) => n.id === activeSection)?.label ?? '';
+
   return (
-    <>
-      <div className="page-header">
-        <h1>Admin Panel</h1>
-        <p>Publish announcements with images or videos</p>
+    <div className="admin-shell">
+      <div className="admin-topbar">
+        <button
+          type="button"
+          className="admin-menu-toggle"
+          onClick={() => setSidebarOpen((o) => !o)}
+          aria-label="Toggle admin menu"
+          aria-expanded={sidebarOpen}
+        >
+          <IconMenu />
+        </button>
+        <span className="admin-topbar-title">{activeLabel}</span>
       </div>
 
-      <div className="admin-grid">
-        <section className="card admin-form-section">
-          <h2 className="card-title">New Announcement</h2>
+      {sidebarOpen && (
+        <div className="admin-sidebar-backdrop" onClick={() => setSidebarOpen(false)} />
+      )}
 
-          {error && <div className="error-message">{error}</div>}
-          {message && <div className="success-message">{message}</div>}
-
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="title">Title</label>
-              <input
-                id="title"
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-                placeholder="Announcement title"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="content">Content</label>
-              <textarea
-                id="content"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                placeholder="Write the announcement details…"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="media">Image or Video (optional)</label>
-              <input
-                id="media"
-                type="file"
-                accept="image/*,video/*"
-                onChange={(e) => setMedia(e.target.files[0] || null)}
-              />
-              {media && <p className="file-name">{media.name}</p>}
-            </div>
-
-            <button type="submit" className="btn btn-primary" disabled={submitting}>
-              {submitting ? 'Publishing…' : 'Publish Announcement'}
+      <aside className={`admin-sidebar ${sidebarOpen ? 'is-open' : ''}`}>
+        <div className="admin-sidebar-header">
+          <h2>Admin Panel</h2>
+          <p>Manage school operations</p>
+        </div>
+        <nav className="admin-nav">
+          {NAV_ITEMS.map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              type="button"
+              className={`admin-nav-btn ${activeSection === id ? 'is-active' : ''}`}
+              onClick={() => goTo(id)}
+            >
+              <Icon />
+              <span>{label}</span>
             </button>
-          </form>
-        </section>
+          ))}
+        </nav>
+      </aside>
 
-        <section className="card admin-info-section">
-          <h2 className="card-title">Admin Guide</h2>
-          <ul className="admin-guide">
-            <li>Published announcements appear on the home page immediately.</li>
-            <li>Supported media: JPEG, PNG, GIF, WebP, MP4, WebM.</li>
-            <li>Maximum file size: 50 MB.</li>
-            <li>You can remove announcements from the home page feed.</li>
-            <li>Toppers are managed through Announcements for now.</li>
-          </ul>
-        </section>
+      <main className="admin-main">
+        {activeSection === 'publish' && (
+          <div className="admin-section-grid">
+            <section className="card admin-form-section">
+              <h2 className="card-title">New Announcement</h2>
 
-        <section className="card admin-form-section">
-          <h2 className="card-title">Upload Examination Results (CSV)</h2>
+              {error && <div className="error-message">{error}</div>}
+              {message && <div className="success-message">{message}</div>}
 
-          {resultsError && <div className="error-message">{resultsError}</div>}
-          {resultsMessage && <div className="success-message">{resultsMessage}</div>}
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label htmlFor="title">Title</label>
+                  <input
+                    id="title"
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                    placeholder="Announcement title"
+                  />
+                </div>
 
-          <form onSubmit={handleResultsUpload}>
-            <div className="form-group">
-              <label htmlFor="examName">Exam Name</label>
-              <input
-                id="examName"
-                type="text"
-                value={examName}
-                onChange={(e) => setExamName(e.target.value)}
-                placeholder="e.g. Annual Examination"
-                required
-              />
-            </div>
+                <div className="form-group">
+                  <label htmlFor="content">Content</label>
+                  <textarea
+                    id="content"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    placeholder="Write the announcement details…"
+                  />
+                </div>
 
-            <div className="form-group">
-              <label htmlFor="className">Class</label>
-              <input
-                id="className"
-                type="text"
-                value={className}
-                onChange={(e) => setClassName(e.target.value)}
-                placeholder="e.g. Grade 8"
-                required
-              />
-            </div>
+                <div className="form-group">
+                  <label htmlFor="media">Image or Video (optional)</label>
+                  <input
+                    id="media"
+                    type="file"
+                    accept="image/*,video/*"
+                    onChange={(e) => setMedia(e.target.files[0] || null)}
+                  />
+                  {media && <p className="file-name">{media.name}</p>}
+                </div>
 
-            <div className="form-group">
-              <label htmlFor="year">Year</label>
-              <input
-                id="year"
-                type="number"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-                placeholder="e.g. 2026"
-                required
-              />
-            </div>
+                <button type="submit" className="btn btn-primary" disabled={submitting}>
+                  {submitting ? 'Publishing…' : 'Publish Announcement'}
+                </button>
+              </form>
+            </section>
 
-            <div className="form-group">
-              <label htmlFor="resultsFile">CSV File</label>
-              <input
-                id="resultsFile"
-                type="file"
-                accept=".csv"
-                onChange={(e) => setResultsFile(e.target.files[0] || null)}
-                required
-              />
-              {resultsFile && <p className="file-name">{resultsFile.name}</p>}
-            </div>
-
-            <button type="submit" className="btn btn-primary" disabled={uploadingResults}>
-              {uploadingResults ? 'Uploading…' : 'Upload Results'}
-            </button>
-          </form>
-        </section>
-
-        <section className="card admin-info-section">
-          <h2 className="card-title">Delete Results by Exam</h2>
-          <p style={{ marginBottom: '1rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-            This permanently removes all result rows matching the exam name (and class/year if given). Use this to clear out an exam before re-uploading corrected data.
-          </p>
-
-          {deleteError && <div className="error-message">{deleteError}</div>}
-          {deleteMessage && <div className="success-message">{deleteMessage}</div>}
-
-          <div className="form-group">
-            <label htmlFor="deleteExamName">Exam Name</label>
-            <input
-              id="deleteExamName"
-              type="text"
-              value={deleteExamName}
-              onChange={(e) => { setDeleteExamName(e.target.value); setDeleteConfirming(false); }}
-              placeholder="e.g. Annual Examination"
-            />
+            <section className="card admin-info-section">
+              <h2 className="card-title">Admin Guide</h2>
+              <ul className="admin-guide">
+                <li>Published announcements appear on the home page immediately.</li>
+                <li>Supported media: JPEG, PNG, GIF, WebP, MP4, WebM.</li>
+                <li>Maximum file size: 50 MB.</li>
+                <li>You can remove announcements from the home page feed.</li>
+                <li>Toppers are managed through Announcements for now.</li>
+              </ul>
+            </section>
           </div>
+        )}
 
-          <div className="form-group">
-            <label htmlFor="deleteClassName">Class (optional)</label>
-            <input
-              id="deleteClassName"
-              type="text"
-              value={deleteClassName}
-              onChange={(e) => { setDeleteClassName(e.target.value); setDeleteConfirming(false); }}
-              placeholder="e.g. Grade 8"
-            />
-          </div>
+        {activeSection === 'results' && (
+          <div className="admin-section-stack">
+            <section className="card admin-form-section">
+              <h2 className="card-title">Upload Examination Results (CSV)</h2>
 
-          <div className="form-group">
-            <label htmlFor="deleteYear">Year (optional)</label>
-            <input
-              id="deleteYear"
-              type="number"
-              value={deleteYear}
-              onChange={(e) => { setDeleteYear(e.target.value); setDeleteConfirming(false); }}
-              placeholder="e.g. 2026"
-            />
-          </div>
+              {resultsError && <div className="error-message">{resultsError}</div>}
+              {resultsMessage && <div className="success-message">{resultsMessage}</div>}
 
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={handleDeleteExam}
-            disabled={deleting}
-          >
-            {deleting
-              ? 'Deleting…'
-              : deleteConfirming
-              ? 'Click again to confirm delete'
-              : 'Delete Results'}
-          </button>
+              <form onSubmit={handleResultsUpload}>
+                <div className="admin-inline-fields">
+                  <div className="form-group">
+                    <label htmlFor="examName">Exam Name</label>
+                    <input
+                      id="examName"
+                      type="text"
+                      value={examName}
+                      onChange={(e) => setExamName(e.target.value)}
+                      placeholder="e.g. Annual Examination"
+                      required
+                    />
+                  </div>
 
-          <hr style={{ margin: '1.5rem 0', border: 'none', borderTop: '1px solid var(--border)' }} />
+                  <div className="form-group">
+                    <label htmlFor="className">Class</label>
+                    <input
+                      id="className"
+                      type="text"
+                      value={className}
+                      onChange={(e) => setClassName(e.target.value)}
+                      placeholder="e.g. Grade 8"
+                      required
+                    />
+                  </div>
 
-          <h3 className="mini-title">Uploaded Result Batches</h3>
+                  <div className="form-group">
+                    <label htmlFor="year">Year</label>
+                    <input
+                      id="year"
+                      type="number"
+                      value={year}
+                      onChange={(e) => setYear(e.target.value)}
+                      placeholder="e.g. 2026"
+                      required
+                    />
+                  </div>
+                </div>
 
-          {batchesLoading ? (
-            <div className="loading-state">Loading batches…</div>
-          ) : examBatches.length === 0 ? (
-            <div className="empty-state">No results uploaded yet.</div>
-          ) : (
-            <div className="table-wrap batches-table-wrap">
-              <table className="data-table batches-table">
-                <thead>
-                  <tr>
-                    <th>Exam</th>
-                    <th>Class</th>
-                    <th>Year</th>
-                    <th>Rows</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {examBatches.map((batch) => {
-                    const key = `${batch.examName}__${batch.className}__${batch.year}`;
-                    return (
-                      <tr key={key}>
-                        <td data-label="Exam">{batch.examName}</td>
-                        <td data-label="Class">{batch.className}</td>
-                        <td data-label="Year">{batch.year}</td>
-                        <td data-label="Rows">{batch.rowCount}</td>
-                        <td data-label="" className="batches-table-action">
-                          <button
-                            type="button"
-                            className="btn btn-danger"
-                            style={{ padding: '0.4rem 0.9rem', fontSize: '0.8rem' }}
-                            onClick={() => handleDeleteBatch(batch)}
-                            disabled={deleting}
-                          >
-                            {confirmingBatchKey === key ? 'Confirm?' : 'Delete'}
-                          </button>
-                        </td>
+                <div className="form-group">
+                  <label htmlFor="resultsFile">CSV File</label>
+                  <input
+                    id="resultsFile"
+                    type="file"
+                    accept=".csv"
+                    onChange={(e) => setResultsFile(e.target.files[0] || null)}
+                    required
+                  />
+                  {resultsFile && <p className="file-name">{resultsFile.name}</p>}
+                </div>
+
+                <button type="submit" className="btn btn-primary" disabled={uploadingResults}>
+                  {uploadingResults ? 'Uploading…' : 'Upload Results'}
+                </button>
+              </form>
+            </section>
+
+            <section className="card admin-info-section">
+              <h2 className="card-title">Delete Results by Exam</h2>
+              <p className="admin-hint-text">
+                This permanently removes all result rows matching the exam name (and class/year
+                if given). Use this to clear out an exam before re-uploading corrected data.
+              </p>
+
+              {deleteError && <div className="error-message">{deleteError}</div>}
+              {deleteMessage && <div className="success-message">{deleteMessage}</div>}
+
+              <div className="admin-inline-fields">
+                <div className="form-group">
+                  <label htmlFor="deleteExamName">Exam Name</label>
+                  <input
+                    id="deleteExamName"
+                    type="text"
+                    value={deleteExamName}
+                    onChange={(e) => {
+                      setDeleteExamName(e.target.value);
+                      setDeleteConfirming(false);
+                    }}
+                    placeholder="e.g. Annual Examination"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="deleteClassName">Class (optional)</label>
+                  <input
+                    id="deleteClassName"
+                    type="text"
+                    value={deleteClassName}
+                    onChange={(e) => {
+                      setDeleteClassName(e.target.value);
+                      setDeleteConfirming(false);
+                    }}
+                    placeholder="e.g. Grade 8"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="deleteYear">Year (optional)</label>
+                  <input
+                    id="deleteYear"
+                    type="number"
+                    value={deleteYear}
+                    onChange={(e) => {
+                      setDeleteYear(e.target.value);
+                      setDeleteConfirming(false);
+                    }}
+                    placeholder="e.g. 2026"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={handleDeleteExam}
+                disabled={deleting}
+              >
+                {deleting
+                  ? 'Deleting…'
+                  : deleteConfirming
+                  ? 'Click again to confirm delete'
+                  : 'Delete Results'}
+              </button>
+
+              <hr className="admin-divider" />
+
+              <h3 className="mini-title">Uploaded Result Batches</h3>
+
+              {batchesLoading ? (
+                <div className="loading-state">Loading batches…</div>
+              ) : examBatches.length === 0 ? (
+                <div className="empty-state">No results uploaded yet.</div>
+              ) : (
+                <div className="table-wrap batches-table-wrap">
+                  <table className="data-table batches-table">
+                    <thead>
+                      <tr>
+                        <th>Exam</th>
+                        <th>Class</th>
+                        <th>Year</th>
+                        <th>Rows</th>
+                        <th></th>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </section>
-      </div>
-    </>
+                    </thead>
+                    <tbody>
+                      {examBatches.map((batch) => {
+                        const key = `${batch.examName}__${batch.className}__${batch.year}`;
+                        return (
+                          <tr key={key}>
+                            <td data-label="Exam">{batch.examName}</td>
+                            <td data-label="Class">{batch.className}</td>
+                            <td data-label="Year">{batch.year}</td>
+                            <td data-label="Rows">{batch.rowCount}</td>
+                            <td data-label="" className="batches-table-action">
+                              <button
+                                type="button"
+                                className="btn btn-danger btn-sm"
+                                onClick={() => handleDeleteBatch(batch)}
+                                disabled={deleting}
+                              >
+                                {confirmingBatchKey === key ? 'Confirm?' : 'Delete'}
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </section>
+          </div>
+        )}
+
+        {activeSection === 'dues' && (
+          <ComingSoonSection
+            title="Manage Dues"
+            description="Fee due tracking isn't connected yet. Once the backend endpoints for dues are ready, this panel is where you'll upload fee schedules, mark payments received, and send reminders for a class or student."
+            bullets={[
+              'Planned: upload a dues sheet per class, term, or year.',
+              'Planned: mark individual dues as paid or waived.',
+              'Planned: export outstanding dues as CSV.',
+            ]}
+          />
+        )}
+
+        {activeSection === 'attendance' && (
+          <ComingSoonSection
+            title="Manage Attendance"
+            description="Attendance management isn't connected yet. Once the backend endpoints for attendance are ready, this panel is where you'll record daily attendance and review class-level summaries."
+            bullets={[
+              'Planned: mark daily attendance per class.',
+              'Planned: view monthly attendance summaries.',
+              'Planned: flag students below an attendance threshold.',
+            ]}
+          />
+        )}
+
+        {activeSection === 'toppers' && (
+          <ComingSoonSection
+            title="Manage Toppers"
+            description="Toppers don't have their own management screen yet — they're currently published as regular announcements. Use Publish Announcements to feature a topper until a dedicated panel is built."
+            ctaLabel="Go to Publish Announcements"
+            onCta={() => goTo('publish')}
+          />
+        )}
+      </main>
+    </div>
   );
 }

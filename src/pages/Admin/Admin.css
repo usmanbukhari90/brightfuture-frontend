@@ -1,0 +1,366 @@
+/* ==========================================================================
+   Admin shell — flex layout so the sidebar can collapse and the content
+   area reclaims the freed space, on both desktop and mobile.
+   Uses the site's existing theme variables (--accent-gold, --border,
+   --success, --text-muted, --text-secondary, --surface) so it stays in
+   sync with the rest of the school site.
+   ========================================================================== */
+
+.admin-shell {
+  display: flex;
+  align-items: flex-start;
+  min-height: calc(100vh - 4rem);
+}
+
+/* ---------- Sidebar ---------- */
+
+.admin-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-right: 1px solid var(--border);
+  padding: 0 1.25rem 1.5rem 0;
+  height: calc(100vh - 3rem);
+  position: sticky;
+  top: 1.5rem;
+  overflow: hidden;
+  opacity: 1;
+  transition: width 0.25s ease, opacity 0.2s ease, padding 0.25s ease, border-color 0.25s ease;
+}
+
+.admin-sidebar.sidebar-closed {
+  width: 0;
+  opacity: 0;
+  padding: 0;
+  border-right-color: transparent;
+  pointer-events: none;
+}
+
+.admin-sidebar-header {
+  width: 232px; /* fixed inner width so text doesn't reflow while collapsing */
+  padding: 0.25rem 0 1.25rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar-header h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+}
+
+.admin-sidebar-header p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.admin-nav {
+  width: 232px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.admin-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.admin-nav-btn svg {
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+.admin-nav-btn:hover {
+  background: rgba(0, 0, 0, 0.035);
+  color: var(--text-primary, var(--text-secondary));
+}
+
+.admin-nav-btn.is-active {
+  background: rgba(0, 0, 0, 0.045);
+  border-color: var(--border);
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+.admin-nav-btn.is-active svg {
+  opacity: 1;
+}
+
+.admin-sidebar-backdrop {
+  display: none;
+}
+
+/* ---------- Top bar (hamburger + section title) ---------- */
+
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.5rem 0 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-topbar-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text-primary, var(--text-secondary));
+}
+
+.admin-menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.admin-menu-toggle:hover {
+  background: rgba(0, 0, 0, 0.045);
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+/* ---------- Main content ---------- */
+
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  padding: 0 0 2rem 1.75rem;
+  transition: padding 0.25s ease;
+}
+
+.admin-main.admin-main-full {
+  padding-left: 0.5rem;
+}
+
+.admin-content {
+  width: 100%;
+}
+
+.admin-section-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.admin-section-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Bigger, easier-to-edit primary card (announcement / results upload) */
+.admin-card-lg {
+  padding: 2rem 2.25rem;
+}
+
+.admin-form-section form {
+  margin-top: 0.5rem;
+}
+
+.admin-textarea-lg {
+  min-height: 220px;
+  resize: vertical;
+}
+
+.admin-inline-fields {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.admin-hint-text {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.admin-divider {
+  margin: 1.5rem 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.file-name {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+}
+
+.success-message {
+  background: #e8f0e8;
+  color: var(--success);
+  padding: 0.75rem 1rem;
+  border: 1px solid #c0d4c0;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.admin-guide {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-guide li {
+  padding: 0.6rem 0;
+  padding-left: 1.25rem;
+  position: relative;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-guide li:last-child {
+  border-bottom: none;
+}
+
+.admin-guide li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent-gold);
+}
+
+/* Buttons pinned to the left edge of their card, never full-width */
+.admin-form-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.admin-form-actions .btn {
+  width: auto;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+}
+
+/* ---------- Coming-soon / empty section state ---------- */
+
+.admin-empty-card {
+  max-width: 640px;
+}
+
+.admin-empty-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+
+.admin-empty-desc {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+.admin-empty-card .admin-guide {
+  margin-bottom: 1.25rem;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .admin-shell {
+    display: block;
+    position: relative;
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    height: 100vh;
+    width: 78vw;
+    max-width: 300px;
+    background: var(--surface, #fff);
+    border-right: 1px solid var(--border);
+    padding: 1.25rem 1.25rem 1.5rem;
+    opacity: 1;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  .admin-sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  .admin-sidebar.sidebar-closed {
+    transform: translateX(-100%);
+    padding: 1.25rem 1.25rem 1.5rem; /* keep inner layout intact while off-screen */
+  }
+
+  .admin-sidebar-header,
+  .admin-nav {
+    width: auto;
+  }
+
+  .admin-sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 30;
+  }
+
+  .admin-main,
+  .admin-main.admin-main-full {
+    padding: 0 1rem 2rem;
+  }
+
+  .admin-topbar {
+    position: sticky;
+    top: 0;
+    background: var(--surface, #fff);
+    z-index: 10;
+  }
+
+  .admin-section-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-inline-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-card-lg {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .admin-form-actions .btn {
+    width: 100%;
+  }
+}

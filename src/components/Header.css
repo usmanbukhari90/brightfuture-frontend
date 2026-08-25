@@ -55,6 +55,10 @@
   gap: 0.85rem;
   flex: 1;
 }
+.header-brand {
+  text-decoration: none;
+  color: inherit;
+}
 
 .logo-shell {
   width: 64px;

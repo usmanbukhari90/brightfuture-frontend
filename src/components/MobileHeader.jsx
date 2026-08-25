@@ -8,9 +8,9 @@ export default function MobileHeader({ onMenuToggle, sidebarOpen, transparent })
 
   return (
     <header className={`mobile-header ${transparent ? 'mobile-header--transparent' : 'mobile-header--solid'}`}>
-      <div className="mobile-header-logo">
+            <Link to="/" className="mobile-header-logo">
         <SchoolLogo variant="dark" />
-      </div>
+      </Link>
       <button
         className={`mobile-menu-btn ${sidebarOpen ? 'open' : ''}`}
         onClick={onMenuToggle}

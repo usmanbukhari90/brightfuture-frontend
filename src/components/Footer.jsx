@@ -7,10 +7,10 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-grid">
 
-        <div className="footer-brand-col">
-          <div className="footer-logo-wrap">
+      <div className="footer-brand-col">
+          <Link to="/" className="footer-logo-wrap">
             <SchoolLogo variant="light" />
-          </div>
+          </Link>
           <p className="footer-school-name">Bright Future School</p>
           <p className="footer-tagline">
             Education with excellence — nurturing minds with discipline,

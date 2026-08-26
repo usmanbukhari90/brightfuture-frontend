@@ -6,11 +6,17 @@
    sync with the rest of the school site.
    ========================================================================== */
 
-.admin-shell {
-  display: flex;
-  align-items: flex-start;
-  min-height: calc(100vh - 4rem);
-}
+   .admin-shell {
+    display: flex;
+    align-items: flex-start;
+    min-height: calc(100vh - 4rem);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
 
 /* ---------- Sidebar ---------- */
 
@@ -18,8 +24,10 @@
   width: 260px;
   flex-shrink: 0;
   align-self: stretch;
-  border-right: 1px solid var(--border);
-  padding: 0 1.25rem 1.5rem 0;
+  background: linear-gradient(135deg, rgba(74, 52, 38, 0.96), rgba(97, 55, 44, 0.94));
+  border-right: 1px solid rgba(154, 123, 79, 0.4);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem 1.25rem 1.5rem 1.5rem;
   height: calc(100vh - 3rem);
   position: sticky;
   top: 1.5rem;
@@ -37,21 +45,22 @@
 }
 
 .admin-sidebar-header {
-  width: 232px; /* fixed inner width so text doesn't reflow while collapsing */
+  width: 232px;
   padding: 0.25rem 0 1.25rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(154, 123, 79, 0.4);
   margin-bottom: 1rem;
 }
 
 .admin-sidebar-header h2 {
   margin: 0 0 0.25rem;
   font-size: 1.15rem;
+  color: #f3e9dc;
 }
 
 .admin-sidebar-header p {
   margin: 0;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: rgba(243, 233, 220, 0.65);
 }
 
 .admin-nav {
@@ -71,11 +80,32 @@
   background: transparent;
   border-radius: 8px;
   font-size: 0.92rem;
-  color: var(--text-secondary);
+  color: rgba(243, 233, 220, 0.82);
   text-align: left;
   cursor: pointer;
   white-space: nowrap;
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.admin-nav-btn svg {
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+.admin-nav-btn:hover {
+  background: rgba(243, 233, 220, 0.08);
+  color: #f3e9dc;
+}
+
+.admin-nav-btn.is-active {
+  background: rgba(154, 123, 79, 0.28);
+  border-color: rgba(154, 123, 79, 0.5);
+  color: #e8c894;
+  font-weight: 600;
+}
+
+.admin-nav-btn.is-active svg {
+  opacity: 1;
 }
 
 .admin-nav-btn svg {
@@ -146,12 +176,12 @@
 .admin-main {
   flex: 1;
   min-width: 0;
-  padding: 0 0 2rem 1.75rem;
+  padding: 0 1.75rem 2rem 1.75rem;
   transition: padding 0.25s ease;
 }
 
 .admin-main.admin-main-full {
-  padding-left: 0.5rem;
+  padding-left: 1rem;
 }
 
 .admin-content {
@@ -306,8 +336,9 @@
     height: 100vh;
     width: 78vw;
     max-width: 300px;
-    background: var(--surface, #fff);
-    border-right: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(74, 52, 38, 0.96), rgba(97, 55, 44, 0.94));
+    border-right: 1px solid rgba(154, 123, 79, 0.4);
+    backdrop-filter: blur(8px);
     padding: 1.25rem 1.25rem 1.5rem;
     opacity: 1;
     transform: translateX(-100%);

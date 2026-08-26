@@ -8,6 +8,7 @@ import ManageResults from './sections/ManageResults';
 import ManageDues from './sections/ManageDues';
 import ManageAttendance from './sections/ManageAttendance';
 import ManageToppers from './sections/ManageToppers';
+import ManageHeroBanners from './sections/ManageHeroBanners';
 import './Admin.css';
 
 export default function Admin() {
@@ -61,6 +62,7 @@ export default function Admin() {
           {activeSection === 'toppers' && (
             <ManageToppers onGoToPublish={() => goTo('publish')} />
           )}
+          {activeSection === 'banners' && <ManageHeroBanners />}
         </main>
       </div>
     </div>

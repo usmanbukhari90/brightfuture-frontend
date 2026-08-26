@@ -52,10 +52,19 @@ export const IconTrophy = () => (
   </svg>
 );
 
+export const IconImage = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2" />
+    <circle cx="8.5" cy="8.5" r="1.5" />
+    <path d="M21 15l-5-5L5 21" />
+  </svg>
+);
+
 export const NAV_ITEMS = [
   { id: 'publish', label: 'Publish Announcements', icon: IconMegaphone },
   { id: 'results', label: 'Manage Results', icon: IconChart },
   { id: 'dues', label: 'Manage Dues', icon: IconWallet },
   { id: 'attendance', label: 'Manage Attendance', icon: IconCalendar },
   { id: 'toppers', label: 'Manage Toppers', icon: IconTrophy },
+  { id: 'banners', label: 'Homepage Banners', icon: IconImage },
 ];
